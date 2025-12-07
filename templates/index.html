@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}Главна страница - Физика Квиз{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body text-center">
+                <h1 class="display-4 mb-4">🎓 Добредојдовте во Физика Квиз!</h1>
+                <p class="lead">Изберете поглавје за да започнете со квизот</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    {% for chapter in chapters %}
+    <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card chapter-card h-100" onclick="goToChapter({{ chapter.chapter_number }})">
+            <div class="card-body">
+                <h5 class="card-title">
+                    Поглавје {{ chapter.chapter_number }}
+                </h5>
+                <h6 class="card-subtitle mb-2 text-muted">
+                    {{ chapter.title }}
+                </h6>
+                <p class="card-text">
+                    <small class="text-muted">
+                        {{ chapter.content_length }} карактери
+                    </small>
+                </p>
+                <button class="btn btn-primary btn-sm">
+                    Започни квиз
+                </button>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+function goToChapter(chapterNumber) {
+    window.location.href = `/chapter/${chapterNumber}`;
+}
+</script>
+{% endblock %}
